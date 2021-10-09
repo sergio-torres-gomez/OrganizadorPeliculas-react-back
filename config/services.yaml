@@ -23,3 +23,33 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    
+    admin.pelicula:
+        class: App\Admin\PeliculaAdmin
+        arguments: [~, App\Entity\Pelicula, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Peliculas }
+        calls:
+            - [setTemplate, ['list', 'admin/listado_peliculas.html.twig']]
+    admin.generos:
+        class: App\Admin\GenerosAdmin
+        arguments: [~, App\Entity\Genero, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Géneros }
+    admin.directores:
+        class: App\Admin\DirectoresAdmin
+        arguments: [~, App\Entity\Director, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Directores }
+    admin.actores:
+        class: App\Admin\ActoresAdmin
+        arguments: [~, App\Entity\Actor, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Actores }
+
+    App\Service\TMDB\SincronizarPeliculas:
+        autowire: true
+
+parameters:
+        app.tmdb_url: '%env(TMDB_URL)%'
+        app.tmdb_api_key: '%env(TMDB_API_KEY)%'

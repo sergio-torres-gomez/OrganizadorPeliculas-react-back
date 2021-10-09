@@ -1,0 +1,8 @@
+
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{% block field %}
+    <button class="btn {% if object.ultimaSincro %} btn-success {% else %} btn-warning {% endif %} sincronizar_pelicula" href="{{ path('sincro_admin', {pelicula_id: object.id}) }}" data-pelicula="{{ object.id }}">
+		<i class="fa fa-sync"></i> Sincronizar película 
+	</button>
+{% endblock %}
